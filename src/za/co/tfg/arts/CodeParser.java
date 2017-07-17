@@ -66,36 +66,32 @@ public class CodeParser {
 
 	private Table getTableDetailsFromLines(ArrayList<String> lines) {
 		Table table = null;
-		Field field = null;
+		
 
 		for(String line : lines){				
-			Object[] tableDetails = parseLine(table,field, line);
-			table = (Table) tableDetails[0];
-			field = (Field) tableDetails[1];
+			table = parseLine(table,line);
+			
 		}
 		return table;
 	}
 
-	private Object[] parseLine(Table table, Field field, String line) {
+	private Table parseLine(Table table,  String line) {
 
 		if(table != null){
-
 			if(line.indexOf("setJavaName")> -1){				
-				field.setLogicalName(getStringContent(line));
+				table.getCurrentField().setLogicalName(getStringContent(line));
 			}else if(line.indexOf("setColumnName")> -1){
-				field.setFieldName(getStringContent(line));
+				table.getCurrentField().setFieldName(getStringContent(line));
 			}else if(line.indexOf("setAttributeClass")> -1){
-				field.setDataType(getAttributeType(line));				
-				table.addField(field);
-				field = new Field();
+				table.getCurrentField().setDataType(getAttributeType(line));				
+				table.setPointerToNextField();
 			}	
 		}
 
 		if(line.indexOf("classInfo.setTableName")> -1){
 			String tableName = getStringContent(line);		
-			table = new Table(tableName,fileName);
-			field = new Field();
+			table = new Table(tableName,fileName);			
 		}		
-		return new Object[]{table,field};		
+		return table;		
 	}
 }

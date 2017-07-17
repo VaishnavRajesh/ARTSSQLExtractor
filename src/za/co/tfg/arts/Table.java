@@ -7,14 +7,12 @@ public class Table {
 	private String tableName;
 	private String logicalTableName;
 	private ArrayList<Field> fields = new ArrayList<Field>();
+	private int currentField;
 
 	public Table(String tableName,String logicalTableName) {
 		this.tableName = tableName;
-		this.logicalTableName = logicalTableName;		
-	}
-
-	public void addField(Field field) {
-		fields.add(field);
+		this.logicalTableName = logicalTableName;
+		this.currentField = 0;
 	}
 
 	@Override
@@ -27,5 +25,18 @@ public class Table {
 		}
 
 		return tableDefinition.toString();
+	}
+
+	public Field getCurrentField() {
+		if(fields.size() == currentField){
+			fields.add(new Field());
+		}
+		
+		return fields.get(currentField);
+	}
+
+	public void setPointerToNextField() {
+		currentField++;
+		
 	}	
 }
