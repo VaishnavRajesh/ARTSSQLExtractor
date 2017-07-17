@@ -1,4 +1,4 @@
-package za.co.tfg.arts;
+package za.co.tfg.arts.model;
 
 import java.util.ArrayList;
 

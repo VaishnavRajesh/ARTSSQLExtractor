@@ -1,4 +1,4 @@
-package za.co.tfg.arts;
+package za.co.tfg.arts.controller;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -9,6 +9,8 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import za.co.tfg.arts.model.Table;
 
 public class CodeParser {
 	static Pattern fieldNamePattern = Pattern.compile("\"([^\"]*)\"");

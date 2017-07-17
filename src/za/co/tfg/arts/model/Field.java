@@ -1,4 +1,4 @@
-package za.co.tfg.arts;
+package za.co.tfg.arts.model;
 public class Field {
 		private String logicalName;
 		private String fieldName;
